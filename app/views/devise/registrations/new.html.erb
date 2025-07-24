@@ -1,0 +1,42 @@
+<div class="min-h-screen flex items-center justify-center bg-[oklch(95.3%_0.051_180.801)] py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <h2 class="mt-6 text-center text-4xl text-gray-500">
+    新規登録
+    </h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :メールアドレス, class: "block text-base font-medium text-gray-500 mb-2" %><br />
+    <%= f.email_field :email, 
+          class: "border-4 border-orange-400/50 appearance-none rounded-md relative block w-full px-4 py-3 border border-gray-300 text-base" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :パスワード, class: "block text-base font-medium text-gray-500 mb-2" %><br />
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, 
+          class: "border-4 border-orange-400/50 appearance-none rounded-md relative block w-full px-4 py-3 border border-gray-300 text-base" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :パスワード確認, class: "block text-base font-medium text-gray-500 mb-2" %><br />
+    <%= f.password_field :password_confirmation, class: "border-4 border-orange-400/50 appearance-none rounded-md relative block w-full px-4 py-3 border border-gray-300 text-base" %>
+  </div>
+
+  <div class="actions flex justify-center">
+    <button class="inline-flex items-center justify-center px-6 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-full hover:from-orange-600 hover:to-orange-700 shadow-sm hover:shadow-md lg:px-4 lg:py-2 lg:w-auto transition-all duration-200"
+            style="...">
+      新規登録
+    </button>
+  </div>
+<% end %>
+          
+  
+
+<%= render "devise/shared/links" %>
+  </div>
+</div>
