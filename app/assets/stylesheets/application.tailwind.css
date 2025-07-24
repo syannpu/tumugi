@@ -1,1 +1,17 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Huninn&display=swap');
+
+@layer base {
+  body {
+    font-family: 'Huninn', sans-serif;
+  }
+  
+  /* ボタンやフォーム要素も確実に適用 */
+  button, input, textarea, select {
+    font-family: inherit;
+  }
+}
