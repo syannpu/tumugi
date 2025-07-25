@@ -4,10 +4,6 @@
     <%= link_to root_path, class: "text-xl font-bold text-gray-800" do %>
       つむぎマルシェ
     <% end %>
-
-    <!-- ハンバーガーメニュー -->
- 
-
     <!-- メニュー項目 -->
     <div class="hidden lg:flex items-center  space-x-4" data-controller="mobile-menu" data-mobile-menu-target="menu">
       <%= link_to "#", class: "text-gray-600 hover:text-gray-800 px-4 py-2" do %>
@@ -44,7 +40,7 @@
         trigger_text: '掲示板',
         trigger_id: 'board',
       menu_items: [
-        { text: '掲示板一覧', path: '#' },
+        { text: '掲示板一覧', path: posts_path },
         { text: '掲示板作成', path: '#' }
       ] %>
 
