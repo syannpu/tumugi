@@ -41,7 +41,7 @@
         trigger_id: 'board',
       menu_items: [
         { text: '掲示板一覧', path: posts_path },
-        { text: '掲示板作成', path: '#' }
+        { text: '掲示板作成', path: new_post_path }
       ] %>
 
       <%= link_to "Myマルシェ", "#", data: { "turbo-method": :delete }, class: "text-gray-600 hover:text-gray-800 px-4 py-2"
