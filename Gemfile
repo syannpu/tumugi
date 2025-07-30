@@ -59,3 +59,4 @@ group :test do
 end
   gem "devise"
   gem 'rails-i18n', '~> 7.0.0'
+  gem 'carrierwave', '2.2.2'

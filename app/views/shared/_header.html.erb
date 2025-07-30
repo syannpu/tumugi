@@ -6,7 +6,7 @@
     <% end %>
     <!-- メニュー項目 -->
     <div class="hidden lg:flex items-center  space-x-4" data-controller="mobile-menu" data-mobile-menu-target="menu">
-      <%= link_to "#", class: "text-gray-600 hover:text-gray-800 px-4 py-2" do %>
+      <%= link_to marches_path, class: "text-gray-600 hover:text-gray-800 px-4 py-2" do %>
       <svg class="h-8 w-8 text-green-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
       fill="none" stroke-linecap="round" stroke-linejoin="round">  
       <path stroke="none" d="M0 0h24v24H0z"/>  
@@ -44,7 +44,7 @@
         { text: '掲示板作成', path: new_post_path }
       ] %>
 
-      <%= link_to "Myマルシェ", "#", data: { "turbo-method": :delete }, class: "text-gray-600 hover:text-gray-800 px-4 py-2"
+      <%= link_to "Myマルシェ", new_marche_path, class: "text-gray-600 hover:text-gray-800 px-4 py-2"
       %>
       <%= link_to "ログアウト", logout_path, data: { "turbo-method": :delete }, class: "text-gray-600 hover:text-gray-800 px-4 py-2"
       %>

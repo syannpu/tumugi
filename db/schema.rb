@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_25_072352) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_30_004153) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "marches", force: :cascade do |t|
+    t.string "title", null: false, comment: "イベントのタイトル"
+    t.text "body", null: false, comment: "イベントの詳細説明"
+    t.bigint "user_id"
+    t.string "image", comment: "画像URL"
+    t.string "location", null: false, comment: "イベントの場所"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "start_at", null: false, comment: "開始日時"
+    t.datetime "end_at", null: false, comment: "終了日時"
+    t.index ["user_id"], name: "index_marches_on_user_id"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.string "title", null: false
@@ -36,5 +49,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_25_072352) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "marches", "users"
   add_foreign_key "posts", "users"
 end
