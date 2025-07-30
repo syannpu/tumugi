@@ -44,7 +44,7 @@
         { text: '掲示板作成', path: new_post_path }
       ] %>
 
-      <%= link_to "Myマルシェ", "#", data: { "turbo-method": :delete }, class: "text-gray-600 hover:text-gray-800 px-4 py-2"
+      <%= link_to "Myマルシェ", new_marche_path, class: "text-gray-600 hover:text-gray-800 px-4 py-2"
       %>
       <%= link_to "ログアウト", logout_path, data: { "turbo-method": :delete }, class: "text-gray-600 hover:text-gray-800 px-4 py-2"
       %>
