@@ -44,8 +44,14 @@
         { text: '掲示板作成', path: new_post_path }
       ] %>
 
-      <%= link_to "Myマルシェ", new_marche_path, class: "text-gray-600 hover:text-gray-800 px-4 py-2"
-      %>
+      <%= render 'shared/dropdown_menu', 
+        trigger_text: 'マルシェ',
+        trigger_id: 'marche',
+      menu_items: [
+        { text: 'マルシェ一覧', path: marches_path },
+        { text: 'マルシェ作成', path: new_marche_path }
+      ] %>
+
       <%= link_to "ログアウト", logout_path, data: { "turbo-method": :delete }, class: "text-gray-600 hover:text-gray-800 px-4 py-2"
       %>
     <% else %>
