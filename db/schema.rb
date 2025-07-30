@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_30_031335) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_30_054119) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,12 +18,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_30_031335) do
     t.string "title", null: false, comment: "イベントのタイトル"
     t.text "body", null: false, comment: "イベントの詳細説明"
     t.bigint "user_id"
-    t.string "image", comment: "画像URL"
     t.string "location", null: false, comment: "イベントの場所"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "start_at", null: false, comment: "開始日時"
     t.datetime "end_at", null: false, comment: "終了日時"
+    t.string "images", default: [], array: true
     t.index ["user_id"], name: "index_marches_on_user_id"
   end
 
