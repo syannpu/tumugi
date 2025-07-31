@@ -1,0 +1,51 @@
+<div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mt-24">
+  <%= form_with(model: @marche, local: true) do |form| %>
+    <div class="mb-4">
+
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">
+        画像
+      </label>
+      <%= form.file_field :images, multiple: true, accept: "image/*", class: "w-full px-32 py-24 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" %>
+    </div>
+
+      <label class="block text-gray-700 text-sm font-bold mb-2">
+        タイトル
+      </label>
+      <%= form.text_field :title, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">
+        本文
+      </label>
+      <%= form.text_area :body, class: "w-full px-32 py-24 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" %>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">
+        場所
+      </label>
+      <%= form.text_field :location, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">
+        開始日時
+      </label>
+      <%= form.datetime_local_field :start_at, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+
+<!-- 終了日時フィールド -->
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">
+        終了日時
+      </label>
+      <%= form.datetime_local_field :end_at, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+ 
+  <div class="mb-4">
+    <%= form.submit "更新する", class: "inline-flex items-center justify-center px-6 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-full hover:from-orange-600 hover:to-orange-700 shadow-sm hover:shadow-md lg:px-4 lg:py-2 lg:w-auto transition-all duration-200" %>
+  </div>
+  <% end %>
+</div>

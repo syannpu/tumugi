@@ -9,31 +9,42 @@ class MarchesController < ApplicationController
   end
 
   def create
-  puts "=== マルシェ作成デバッグ開始 ==="
-  puts "受信したパラメータ全体: #{params.inspect}"
-  puts "マルシェパラメータ: #{params[:marche]}"
-  puts "画像パラメータ: #{params[:marche][:images] if params[:marche]}"
-  puts "画像パラメータのクラス: #{params[:marche][:images].class if params[:marche] && params[:marche][:images]}"
-  puts "ストロングパラメータ結果: #{marche_params}"
-  puts "==========================="
-  
   @marche = current_user.marches.build(marche_params)
   
-  puts "保存前の画像数: #{@marche.images.count}"
-  
     if @marche.save
-    puts "保存成功！"
-    puts "保存後の画像数: #{@marche.images.count}"
     redirect_to marches_path
     else
-    puts "保存失敗: #{@marche.errors.full_messages}"
     render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @marche = Marche.find(params[:id])
+  end
+
+  def edit
+    @marche = current_user.marches.find(params[:id])
+  end
+
+  def update
+    @marche = Marche.find(params[:id])
+    if @marche.update(marche_params)
+       redirect_to marche_path(@marche), success: t('defaults.flash_message.updated', item: Marche.model_name.human)
+    else
+      flash.now[:danger] = t('defaults.flash_message.not_updated', item: Marche.model_name.human)
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @marche = Marche.find(params[:id])
+    @marche.destroy
+    redirect_to marches_path, notice: '削除しました'
   end
 
   private
 
   def marche_params
-    params.require(:marche).permit(:title, :body, :location, :start_at, :end_at, images: [] )
+    params.require(:marche).permit(:title, :body, :location,{ images: []}, :start_at, :end_at )
   end
 end

@@ -1,14 +1,62 @@
-<div class="container mx-auto px-4 py-6">
+div class="container mx-auto px-4 py-6">
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     <% @marches.each do |marche| %>
-      <!-- 各マルシェのカードコンテナ -->
+      <!-- ここを修正！ -->
       <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-        <!-- 画像エリア -->
-        <div class="w-full h-48 overflow-hidden">
+        
+        <!-- 画像エリア（自動スライド対応） -->
+        <div class="relative w-full h-48 overflow-hidden rounded-lg bg-gray-200">
           <% if marche.images.present? %>
-            <%= image_tag marche.images.first.url, class: "w-full h-full object-cover" %>
+            <!-- 自動スライドコンテナ -->
+            <div class="auto-slider" 
+                 data-marche-id="<%= marche.id %>"
+                 data-image-count="<%= marche.images.count %>"
+                 data-interval="3000">
+              
+              <!-- 各画像のスライド -->
+              <% marche.images.each_with_index do |image, index| %>
+                <div class="slide absolute inset-0 transition-opacity duration-700 ease-in-out
+                            <%= 'opacity-100' if index == 0 %>
+                            <%= 'opacity-0' unless index == 0 %>"
+                     data-slide-index="<%= index %>">
+                  <%= image_tag image.url, 
+                               class: "w-full h-48 object-cover",
+                               alt: "#{marche.title} - 画像#{index + 1}" %>
+                </div>
+              <% end %>
+              
+              <!-- 複数画像がある場合の表示要素 -->
+              <% if marche.images.count > 1 %>
+                <!-- 画像枚数表示 -->
+                <div class="absolute top-2 right-2 bg-black bg-opacity-60 
+                            text-white text-xs px-2 py-1 rounded z-10">
+                  <span class="current-slide-number">1</span> / <%= marche.images.count %>
+                </div>
+                
+                <!-- インジケーター（下部の点） -->
+                <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 
+                            flex space-x-1 z-10">
+                  <% marche.images.each_with_index do |_, index| %>
+                    <div class="w-2 h-2 rounded-full transition-all duration-300
+                                <%= 'bg-white' if index == 0 %>
+                                <%= 'bg-white bg-opacity-50' unless index == 0 %>"
+                         data-indicator="<%= index %>">
+                    </div>
+                  <% end %>
+                </div>
+                
+                <!-- ホバー時の一時停止表示 -->
+                <div class="absolute inset-0 flex items-center justify-center 
+                            opacity-0 hover:opacity-100 transition-opacity duration-300 z-10">
+                  <div class="bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
+                    自動スライド中
+                  </div>
+                </div>
+              <% end %>
+            </div>
           <% else %>
-            <div class="bg-gray-200 w-full h-full flex items-center justify-center">
+            <!-- 画像がない場合 -->
+            <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
               <span class="text-gray-500">画像なし</span>
             </div>
           <% end %>
@@ -18,11 +66,10 @@
         <div class="p-4">
           <h3 class="text-lg font-semibold mb-2"><%= marche.title %></h3>
           <p class="text-gray-600 text-sm"><%= truncate(marche.body, length: 100) %></p>
-          <%= link_to "詳細を見る", "#", 
+          <%= link_to "詳細を見る", marche_path(marche), 
                 class: "text-blue-500 hover:text-blue-700 text-sm font-medium" %>
         </div>
       </div>
     <% end %>
   </div>
 </div>
- 
