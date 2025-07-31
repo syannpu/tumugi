@@ -15,3 +15,8 @@
     font-family: inherit;
   }
 }
+
+.auto-slider {
+  height: 192px;
+  position: relative;
+}
