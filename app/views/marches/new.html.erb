@@ -43,6 +43,19 @@
       </label>
       <%= form.datetime_local_field :end_at, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>
     </div>
+
+    <div class="flex flex-wrap ">
+      <label class="block text-gray-700 text-sm font-bold mb-2">
+      キーワード（複数選択可能）
+      </label>
+  
+      <% @atmospheres.each do |atmosphere| %>
+        <div class="flex items-center mb-2">
+          <%= form.check_box :atmosphere_ids, { multiple: true }, atmosphere.id, "" %>
+          <%= form.label :atmosphere_ids, atmosphere.name, value: atmosphere.id %>
+        </div>
+      <% end %>
+    </div>
  
   <div class="mb-4">
     <%= form.submit "投稿する", class: "inline-flex items-center justify-center px-6 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-full hover:from-orange-600 hover:to-orange-700 shadow-sm hover:shadow-md lg:px-4 lg:py-2 lg:w-auto transition-all duration-200" %>

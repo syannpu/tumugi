@@ -18,6 +18,14 @@
           <p class="text-gray-700"><%= simple_format(@marche.location) %></p>
           <%= @marche.start_at.strftime("%Y年%m月%d日 %H:%M") %>
           <%= @marche.end_at.strftime("%Y年%m月%d日 %H:%M") %>
+          <div class="atmospheres">
+            <h4>雰囲気</h4>
+            <% @marche.atmospheres.each do |atmosphere| %>
+              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full mr-2">
+              <%= atmosphere.name %>
+             </span>
+            <% end %>
+          </div>
         </div>
       </div>
       
