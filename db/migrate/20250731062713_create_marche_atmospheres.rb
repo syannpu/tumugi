@@ -5,8 +5,6 @@ class CreateMarcheAtmospheres < ActiveRecord::Migration[7.2]
       t.references :atmosphere, foreign_key: true
       t.timestamps
     end
-    add_index :marche_atmospheres, [:marche_id, :atmosphere_id], unique: true
+    add_index :marche_atmospheres, [ :marche_id, :atmosphere_id ], unique: true
   end
 end
-
-

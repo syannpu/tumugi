@@ -1,12 +1,37 @@
 <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mt-24">
   <%= form_with(model: @marche, local: true) do |form| %>
     <div class="mb-4">
-
-    <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2">
-        画像
+       画像
       </label>
-      <%= form.file_field :images, multiple: true, accept: "image/*", class: "w-full px-32 py-24 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" %>
+  
+  <!-- 現在の画像を表示 -->
+      <% if @marche.images.present? %>
+        <div class="mb-4">
+          <p class="text-sm text-gray-600 mb-2">現在の画像:</p>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <% @marche.images.each_with_index do |image, index| %>
+              <div class="relative">
+                <%= image_tag image.url, class: "w-full h-32 object-cover rounded-lg border" %>
+                  <div class="mt-2">
+                  <%= check_box_tag "remove_images[]", index, false, 
+                    id: "remove_image_#{index}", 
+                    class: "mr-2" %>
+                  <%= label_tag "remove_image_#{index}", "削除", 
+                    class: "text-sm text-red-600" %>
+                  </div>
+              </div>
+            <% end %>
+        </div>
+    </div>
+  <% end %>
+  
+  <!-- 新しい画像をアップロード -->
+    <div>
+      <p class="text-sm text-gray-600 mb-2">新しい画像を追加:</p>
+      <%= form.file_field :images, multiple: true,
+          accept: "image/*", 
+          class: "w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>
     </div>
 
       <label class="block text-gray-700 text-sm font-bold mb-2">
