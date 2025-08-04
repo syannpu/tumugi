@@ -1,0 +1,44 @@
+<div class="bg-white p-6 rounded-lg shadow-md mb-8">
+  <%= search_form_for @search, url: marches_path, method: :get do |f| %>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <div>
+        <%= f.label :title_cont, "日時", class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <%= f.text_field :title_cont, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500", placeholder: "例：朝市" %>
+      </div>
+      
+      <div>
+        <%= f.label :location_cont, "場所", class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <%= f.text_field :location_cont, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500", placeholder: "例：東京" %>
+      </div>
+      
+      <div>
+        <%= f.label :atmospheres_id_eq, "キーワード", class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <%= f.select :atmospheres_id_eq, 
+            options_from_collection_for_select(Atmosphere.all, :id, :name, params.dig(:q, :atmospheres_id_eq)), 
+            {include_blank: '選択なし'}, 
+            {class: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'} %>
+      </div>
+
+      <div>
+        <%= f.label :targets_id_eq, "ターゲット", class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <%= f.select :targets_id_eq, 
+            options_from_collection_for_select(Target.all, :id, :name, params.dig(:q, :targets_id_eq)), 
+            {include_blank: '選択なし'}, 
+            {class: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'} %>
+      </div>
+
+      <div>
+        <%= f.label :prices_id_eq, "価格帯", class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <%= f.select :prices_id_eq, 
+            options_from_collection_for_select(Price.all, :id, :name, params.dig(:q, :pricess_id_eq)), 
+            {include_blank: '選択なし'}, 
+            {class: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'} %>
+      </div>
+    </div>
+    
+    <div class="flex justify-center space-x-4">
+      <%= f.submit "検索", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded transition duration-200" %>
+      <%= link_to "リセット", marches_path, class: "bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-6 rounded transition duration-200" %>
+    </div>
+  <% end %>
+</div>

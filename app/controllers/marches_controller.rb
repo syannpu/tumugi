@@ -3,7 +3,8 @@ class MarchesController < ApplicationController
   before_action :set_marche, only: [ :edit, :update, :destroy, :show ]
 
   def index
-    @marches = Marche.includes(:user)
+    @search = Marche.ransack(params[:q])
+    @marches = @search.result.includes(:atmospheres, :targets, :prices, :user)
   end
 
   def new
@@ -26,7 +27,10 @@ class MarchesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @marche = Marche.find(params[:id])
+    @search = Marche.ransack(params[:q]) 
+  end
 
   def edit
     @atmospheres = Atmosphere.all
@@ -35,10 +39,15 @@ class MarchesController < ApplicationController
   end
 
   def update
-    if @marche.update(marche_params)
-       redirect_to marche_path(@marche), success: t("defaults.flash_message.updated", item: Marche.model_name.human)
+    if @marche.update(marche_params.except(:images))
+      if params[:marche][:images].present?
+      # 既存の画像を保持しつつ、新しい画像を追加
+        new_images = params[:marche][:images].reject(&:blank?)
+        @marche.images = @marche.images + new_images  # 既存 + 新規
+        @marche.save
+      end
+      redirect_to @marche, notice: 'マルシェが更新されました'
     else
-      flash.now[:danger] = t("defaults.flash_message.not_updated", item: Marche.model_name.human)
       render :edit, status: :unprocessable_entity
     end
   end

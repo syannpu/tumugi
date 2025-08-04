@@ -11,4 +11,13 @@ class Marche < ApplicationRecord
   has_many :targets, through: :marche_targets, source: :target
   has_many :marche_prices, dependent: :destroy
   has_many :prices, through: :marche_prices, source: :price
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["body", "created_at", "end_at", "id", "location", "start_at", "title", "updated_at", "user_id"]
+  end
+
+  # 関連付けも検索対象にする場合
+  def self.ransackable_associations(auth_object = nil)
+    ["atmospheres", "targets", "prices"]  # 必要に応じて追加
+  end
 end

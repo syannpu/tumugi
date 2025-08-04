@@ -1,0 +1,48 @@
+<% return unless marche.present? %>
+
+<div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200">
+  
+  <!-- 画像表示部分 -->
+  <div class="relative w-full h-48 overflow-hidden rounded-t-lg bg-gray-200">
+    <% if marche.images.present? %>
+      <div class="image-slider" data-marche-id="<%= marche.id %>">
+        <% marche.images.each_with_index do |image_uploader, index| %>
+          <div class="slide <%= 'active' if index == 0 %>" 
+               style="display: <%= index == 0 ? 'block' : 'none' %>;">
+            <%= image_tag image_uploader.url, 
+                class: "w-full h-48 object-cover transition-opacity duration-500",
+                alt: "#{marche.title}の画像#{index + 1}" %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <!-- デフォルト画像 -->
+      <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+        <span class="text-gray-400 text-4xl">🏪</span>
+      </div>
+    <% end %>
+  </div>
+  
+  <!-- カード内容 -->
+  <div class="p-4">
+    <h3 class="text-lg font-bold text-gray-800 mb-2">
+      <%= link_to marche.title, marche_path(marche), 
+          class: "hover:text-blue-600 transition-colors duration-200" %>
+    </h3>
+    
+    <p class="text-gray-700 text-sm mb-3">
+      <%= truncate(marche.body, length: 80) %>
+    </p>
+    
+    <div class="text-gray-600 text-sm space-y-1">
+      <p class="flex items-center">
+        <span class="mr-2">📍</span>
+        <%= marche.location %>
+      </p>
+      <p class="flex items-center">
+        <span class="mr-2">📅</span>
+        <%= marche.start_at&.strftime("%m/%d %H:%M") %>
+      </p>
+    </div>
+  </div>
+</div>
