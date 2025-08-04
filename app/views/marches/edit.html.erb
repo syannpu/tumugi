@@ -45,7 +45,7 @@
     </div>
 
     <div class="field mb-4">
-      <%= form.label :atmosphere_ids, "雰囲気を選択", class: "block text-sm font-medium text-gray-700 mb-2" %>
+      <%= form.label :atmosphere_ids, "キーワードを選択", class: "block text-sm font-medium text-gray-700 mb-2" %>
     
       <div class="atmosphere-checkboxes space-y-2">
         <% @atmospheres.each do |atmosphere| %>
@@ -58,6 +58,46 @@
               }, 
               atmosphere.id, "" %>
             <%= form.label "atmosphere_ids_#{atmosphere.id}", atmosphere.name, 
+              class: "text-sm text-gray-700" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="field mb-4">
+      <%= form.label :target_ids, "ターゲットを選択", class: "block text-sm font-medium text-gray-700 mb-2" %>
+    
+      <div class="target-checkboxes space-y-2">
+        <% @targets.each do |target| %>
+          <div class="flex items-center">
+            <%= form.check_box :target_ids, 
+              { 
+                multiple: true, 
+                checked: @marche.target_ids.include?(target.id),
+                class: "mr-2"
+              }, 
+              target.id, "" %>
+            <%= form.label "target_ids_#{target.id}", target.name, 
+              class: "text-sm text-gray-700" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="field mb-4">
+      <%= form.label :target_ids, "価格帯を選択", class: "block text-sm font-medium text-gray-700 mb-2" %>
+    
+      <div class="target-checkboxes space-y-2">
+        <% @prices.each do |price| %>
+          <div class="flex items-center">
+            <%= form.check_box :price_ids, 
+              { 
+                multiple: true, 
+                checked: @marche.price_ids.include?(price.id),
+                class: "mr-2"
+              }, 
+              price.id, "" %>
+            <%= form.label "price_ids_#{price.id}", price.name, 
               class: "text-sm text-gray-700" %>
           </div>
         <% end %>

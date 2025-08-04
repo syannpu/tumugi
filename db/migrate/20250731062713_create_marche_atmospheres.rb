@@ -8,3 +8,5 @@ class CreateMarcheAtmospheres < ActiveRecord::Migration[7.2]
     add_index :marche_atmospheres, [:marche_id, :atmosphere_id], unique: true
   end
 end
+
+

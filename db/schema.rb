@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_31_063441) do
+ActiveRecord::Schema[7.2].define(version: 2025_08_01_085537) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,6 +27,26 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_31_063441) do
     t.datetime "updated_at", null: false
     t.index ["atmosphere_id"], name: "index_marche_atmospheres_on_atmosphere_id"
     t.index ["marche_id"], name: "index_marche_atmospheres_on_marche_id"
+  end
+
+  create_table "marche_prices", force: :cascade do |t|
+    t.bigint "marche_id"
+    t.bigint "price_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["marche_id", "price_id"], name: "index_marche_prices_on_marche_id_and_price_id", unique: true
+    t.index ["marche_id"], name: "index_marche_prices_on_marche_id"
+    t.index ["price_id"], name: "index_marche_prices_on_price_id"
+  end
+
+  create_table "marche_targets", force: :cascade do |t|
+    t.bigint "marche_id"
+    t.bigint "target_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["marche_id", "target_id"], name: "index_marche_targets_on_marche_id_and_target_id", unique: true
+    t.index ["marche_id"], name: "index_marche_targets_on_marche_id"
+    t.index ["target_id"], name: "index_marche_targets_on_target_id"
   end
 
   create_table "marches", force: :cascade do |t|
@@ -52,6 +72,18 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_31_063441) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "prices", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "targets", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -66,6 +98,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_31_063441) do
 
   add_foreign_key "marche_atmospheres", "atmospheres"
   add_foreign_key "marche_atmospheres", "marches"
+  add_foreign_key "marche_prices", "marches"
+  add_foreign_key "marche_prices", "prices"
+  add_foreign_key "marche_targets", "marches"
+  add_foreign_key "marche_targets", "targets"
   add_foreign_key "marches", "users"
   add_foreign_key "posts", "users"
 end
