@@ -56,6 +56,32 @@
         </div>
       <% end %>
     </div>
+
+    <div class="flex flex-wrap ">
+      <label class="block text-gray-700 text-sm font-bold mb-2">
+      ターゲット（複数選択可能）
+      </label>
+  
+      <% @targets.each do |target| %>
+        <div class="flex items-center mb-2">
+          <%= form.check_box :target_ids, { multiple: true }, target.id, "" %>
+          <%= form.label :target_ids, target.name, value: target.id %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="flex flex-wrap ">
+      <label class="block text-gray-700 text-sm font-bold mb-2">
+      価格帯（複数選択可能）
+      </label>
+  
+      <% @prices.each do |price| %>
+        <div class="flex items-center mb-2">
+          <%= form.check_box :price_ids, { multiple: true }, price.id, "" %>
+          <%= form.label :price_ids, price.name, value: price.id %>
+        </div>
+      <% end %>
+    </div>
  
   <div class="mb-4">
     <%= form.submit "投稿する", class: "inline-flex items-center justify-center px-6 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-full hover:from-orange-600 hover:to-orange-700 shadow-sm hover:shadow-md lg:px-4 lg:py-2 lg:w-auto transition-all duration-200" %>

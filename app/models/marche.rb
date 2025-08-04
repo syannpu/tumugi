@@ -7,4 +7,8 @@ class Marche < ApplicationRecord
   mount_uploaders :images, ImageUploader  
   has_many :marche_atmospheres, dependent: :destroy 
   has_many :atmospheres, through: :marche_atmospheres, source: :atmosphere
+  has_many :marche_targets, dependent: :destroy 
+  has_many :targets, through: :marche_targets, source: :target
+  has_many :marche_prices, dependent: :destroy 
+  has_many :prices, through: :marche_prices, source: :price
 end

@@ -1,4 +1,4 @@
-<div class="container mx-auto pt-12">
+<div class="container mx-auto pt-20">
   <h1 class="text-2xl font-bold mb-6">マルシェ詳細</h1>
   <article class="bg-white rounded-lg shadow-md">
     <div class="p-6">
@@ -19,11 +19,27 @@
           <%= @marche.start_at.strftime("%Y年%m月%d日 %H:%M") %>
           <%= @marche.end_at.strftime("%Y年%m月%d日 %H:%M") %>
           <div class="atmospheres">
-            <h4>雰囲気</h4>
+            <h4>キーワード</h4>
             <% @marche.atmospheres.each do |atmosphere| %>
-              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full mr-2">
+              <span class="bg-orange-200 text-orange-600 px-3 py-1 rounded-full mr-2">
               <%= atmosphere.name %>
              </span>
+            <% end %>
+          </div>
+          <div class="targets">
+            <h4>ターゲット</h4>
+            <% @marche.targets.each do |target| %>
+              <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full mr-2">
+              <%= target.name %>
+             </span>
+            <% end %>
+          </div>
+          <div class="prices">
+            <h4>価格帯</h4>
+            <% @marche.prices.each do |price| %>
+              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full mr-2">
+              <%= price.name %>
+              </span>
             <% end %>
           </div>
         </div>
