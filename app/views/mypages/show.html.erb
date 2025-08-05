@@ -1,0 +1,54 @@
+<div class="container mx-auto pt-12">
+  <h1 class="text-2xl font-bold mb-6">My page</h1>
+  <article class="bg-white rounded-lg shadow-md">
+    <div class="p-6">
+      <div class="md:flex md:space-x-6">
+        <div class="md:w-1/4">      
+          <% if @user.image.present? %>
+            <%= image_tag @user.image.url, class: "w-60 h-60 rounded-full object-cover shadow-lg ring-2 ring-gray-500 ring-offset-2" %>
+          <% else %>
+     
+          <% end %>
+        </div>
+        
+        <div class="md:w-3/4">
+          <!-- ユーザー名の表示 -->
+          <h3 class="text-3xl font-semibold mb-8">
+            <%= current_user.username.present? ? current_user.username : "ユーザー名未設定" %>
+          </h3>
+          
+          <h4 class="text-xl text-gray-600 mb-8">
+            住所:<%= current_user.hometown.present? ? current_user.hometown : "未設定" %>
+          </h4>
+          
+          <p class="text-xl text-gray-600 mb-8">
+            性別: <%= current_user.gender.present? ? current_user.gender : "未設定" %> <!-- ここを埋めてみてください -->
+          </p>
+          <p class="text-xl text-gray-600 mb-8">
+            年齢: <%= current_user.age.present? ? current_user.age : "未設定" %> <!-- ここを埋めてみてください -->
+          </p>
+
+          <p class="text-xl text-gray-600 mb-8">
+            Instagram: 
+              <% if current_user.instagram.present? %>
+                <%= link_to "@#{current_user.instagram}", 
+                 "https://instagram.com/#{current_user.instagram}", 
+                  target: "_blank", 
+                  class: "text-pink-500 hover:underline" %>
+              <% else %>
+                未設定
+              <% end %>
+          </p>
+        </div>
+      </div>      
+      <!-- ボタン部分 -->
+        <div class="flex justify-end mt-6 space-x-3">
+          <%= link_to "ホームに戻る", root_path, 
+              class: "inline-flex items-center px-4 py-2 border border-blue-300 shadow-sm text-sm font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50" %>
+        
+          <%= link_to "編集する", edit_mypage_path, 
+              class: "inline-flex items-center px-4 py-2 border border-orange-300 shadow-sm text-sm font-medium rounded-md text-orange-700 bg-white hover:bg-orange-100" %>
+        </div>
+    </div>
+  </article>
+</div>
