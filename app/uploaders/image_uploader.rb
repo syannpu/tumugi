@@ -14,8 +14,16 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    "marche_placeholder.png"  # app/assets/images/marche_placeholder.png
-    "post_placeholder.png"
+    case model.class.name
+    when 'User'
+      "user_placeholder.png"
+    when 'Post'
+      "post_placeholder.png"
+    when 'Marche'
+      "marche_placeholder.png"
+    else
+      "default_placeholder.png"
+    end
   end
 
   def extension_allowlist
