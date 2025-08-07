@@ -1,6 +1,7 @@
 class MarchesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_marche, only: [ :edit, :update, :destroy, :show ]
+  before_action :set_marche, only: [ :edit, :update, :destroy ]
+  before_action :ensure_authorized_access, only: [:participants_info]
 
   def index
     @search = Marche.ransack(params[:q])
@@ -30,6 +31,15 @@ class MarchesController < ApplicationController
   def show
     @marche = Marche.find(params[:id])
     @search = Marche.ransack(params[:q]) 
+  
+    if @marche.user == current_user
+      # 開催者向けビュー
+      @join_marches = @marche.join_marches.includes(:user)
+    
+    else
+      # 一般ユーザー向けビュー
+      render 'show'
+    end
   end
 
   def edit
@@ -57,13 +67,35 @@ class MarchesController < ApplicationController
     redirect_to marches_path, notice: "削除しました"
   end
 
+  def participants_info
+    @marche = Marche.find(params[:id])
+    @approved_participants = @marche.join_marches.approved.includes(:user)
+    @my_application = current_user.join_marches.find_by(marche: @marche)
+  end
+
   private
+
+  def ensure_authorized_access
+    @marche = Marche.find(params[:id])
+    
+    # 開催者かチェック
+    if @marche.user == current_user
+      return true
+    end
+    
+    # 確定した出展者かチェック
+    @my_application = current_user.join_marches.find_by(marche: @marche)
+    unless @my_application&.approved?
+      flash[:alert] = "確定した出展者または開催者のみアクセス可能です"
+      redirect_to root_path
+    end
+  end
 
   def set_marche
     @marche = current_user.marches.find(params[:id])
   end
 
   def marche_params
-    params.require(:marche).permit(:title, :body, :location, { images: [] }, :start_at, :end_at, atmosphere_ids: [], target_ids: [], price_ids: [])
+    params.require(:marche).permit(:title, :body, :location, :venue, { images: [] }, :description, :start_at, :end_at, :held_at, atmosphere_ids: [], target_ids: [], price_ids: [])
   end
 end

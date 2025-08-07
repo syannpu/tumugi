@@ -1,0 +1,2 @@
+module JoinMarchesHelper
+end

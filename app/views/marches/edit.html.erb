@@ -42,9 +42,23 @@
 
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2">
+        このマルシェの魅力
+      </label>
+      <%= form.text_area :description, class: "w-full px-32 py-24 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" %>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">
         本文
       </label>
       <%= form.text_area :body, class: "w-full px-32 py-24 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" %>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">
+        開催日
+      </label>
+      <%= form.datetime_local_field :held_at, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>
     </div>
 
     <div class="mb-4">
@@ -56,7 +70,7 @@
 
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2">
-        開始日時
+        出店募集開始
       </label>
       <%= form.datetime_local_field :start_at, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>
     </div>
@@ -64,7 +78,7 @@
 <!-- 終了日時フィールド -->
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2">
-        終了日時
+        出店募集終了
       </label>
       <%= form.datetime_local_field :end_at, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>
     </div>

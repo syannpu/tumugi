@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users, controllers: {
    registrations: "users/registrations",
    sessions:       "users/sessions"
@@ -8,11 +9,19 @@ Rails.application.routes.draw do
   devise_scope :user do
     delete "logout", to: "users/sessions#destroy", as: :logout
   end
-
+  
   resources :posts, only: %i[index new create show edit update destroy]
-  resources :marches, only: %i[index new create show edit update destroy]
+
+  resources :marches, only: %i[index new create show edit update destroy] do
+    resources :join_marches, only: [:index, :update], controller: 'marches/join_marches'
+    get :participants_info, on: :member 
+  end
+  
   resource :mypage, only: [:show, :edit, :update]
 
+  namespace :mypage do
+    resources :join_marches, only: [:create, :index, :destroy]
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

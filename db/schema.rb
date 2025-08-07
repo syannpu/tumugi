@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_08_05_025805) do
+ActiveRecord::Schema[7.2].define(version: 2025_08_07_074057) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_05_025805) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "join_marches", force: :cascade do |t|
+    t.bigint "marche_id"
+    t.bigint "user_id"
+    t.integer "approval_status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["marche_id"], name: "index_join_marches_on_marche_id"
+    t.index ["user_id"], name: "index_join_marches_on_user_id"
   end
 
   create_table "marche_atmospheres", force: :cascade do |t|
@@ -56,9 +66,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_05_025805) do
     t.string "location", null: false, comment: "イベントの場所"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "start_at", null: false, comment: "開始日時"
-    t.datetime "end_at", null: false, comment: "終了日時"
+    t.datetime "start_at", null: false, comment: "出品募集開始"
+    t.datetime "end_at", null: false, comment: "出品募集終了"
     t.string "images", default: [], array: true
+    t.datetime "held_at"
+    t.string "description"
+    t.string "venue"
     t.index ["user_id"], name: "index_marches_on_user_id"
   end
 
@@ -102,6 +115,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_05_025805) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "join_marches", "marches"
+  add_foreign_key "join_marches", "users"
   add_foreign_key "marche_atmospheres", "atmospheres"
   add_foreign_key "marche_atmospheres", "marches"
   add_foreign_key "marche_prices", "marches"

@@ -135,4 +135,3 @@ if (document.readyState === 'loading') {
     showSlide(currentIndex);
     console.log(`スライダー${sliderIndex}の手動コントロール作成完了`);
   }
-});

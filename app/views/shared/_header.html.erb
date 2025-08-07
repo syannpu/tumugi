@@ -24,13 +24,15 @@
       </svg>
       <% end %>
 
-     <%= link_to mypage_path, class: "text-gray-600 hover:text-gray-800 px-4 py-2" do %>
-     <svg class="h-8 w-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-     </svg>
-     <% end %>
-
       <% if user_signed_in? %>
+
+        <%= render 'shared/dropdown_menu', 
+          trigger_text: 'Myページ',
+          trigger_id: 'mypage',
+          menu_items: [
+          { text: 'ユーザー情報', path: mypage_path },
+          { text: 'Myマルシェ', path: mypage_join_marches_path }
+        ] %>
   
        <%= render 'shared/dropdown_menu', 
           trigger_text: '掲示板',
@@ -45,7 +47,7 @@
           trigger_id: 'marche',
         menu_items: [
           { text: 'マルシェ一覧', path: marches_path },
-          { text: 'マルシェ作成', path: new_marche_path }
+          { text: 'マルシェ作成', path: new_marche_path },
         ] %>
 
          <%= link_to "ログアウト", logout_path, data: { "turbo-method": :delete }, class: "text-gray-600 hover:text-gray-800 px-4 py-2"
