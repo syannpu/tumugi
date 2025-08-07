@@ -17,6 +17,13 @@
 
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2">
+        要約
+      </label>
+      <%= form.text_area :description, class: "w-full px-4 py-6 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" %>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">
         本文
       </label>
       <%= form.text_area :body, class: "w-full px-32 py-24 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" %>
@@ -24,14 +31,29 @@
 
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2">
-        場所
+        開催日
       </label>
-      <%= form.text_field :location, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+      <%= form.datetime_local_field :held_at, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+    
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">
+          開催場所（名称）
+        </label>
+        <%= form.text_field :venue, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+     
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">
+        住所（都道府県）
+      </label>
+      <%= form.text_field :location,  placeholder: "例）愛知県名古屋市港区1-30", 
+      class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>
     </div>
 
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2">
-        開始日時
+        募集開始日時
       </label>
       <%= form.datetime_local_field :start_at, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>
     </div>
@@ -39,7 +61,7 @@
 <!-- 終了日時フィールド -->
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2">
-        終了日時
+        募集終了日時
       </label>
       <%= form.datetime_local_field :end_at, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>
     </div>

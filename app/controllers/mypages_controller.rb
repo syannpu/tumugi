@@ -2,10 +2,12 @@ class MypagesController < ApplicationController
   before_action :authenticate_user!
   def show
     @user = current_user
+    render 'mypage/show'
   end
 
   def edit
     @user = current_user
+    render 'mypage/edit'
   end
 
   def update
@@ -13,7 +15,7 @@ class MypagesController < ApplicationController
     if @user.update(mypage_params)
       redirect_to mypage_path, notice: 'プロフィールを更新しました'
     else
-      render :edit, status: :unprocessable_entity
+      render 'mypage/edit', status: :unprocessable_entity
     end
   end
 

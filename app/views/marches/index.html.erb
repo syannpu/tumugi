@@ -38,19 +38,25 @@
               <h3 class="text-lg font-semibold mb-2 text-gray-800">
                 <%= link_to marche.title, marche_path(marche), class: "hover:text-blue-600 transition-colors" %>
               </h3>
-              
-              <!-- 本文 -->
-              <% if marche.body.present? %>
-                <p class="text-gray-600 text-sm mb-2">
-                  <%= truncate(marche.body, length: 100) %>
+
+               <% if marche.description.present? %>
+                <p class="text-gray-600 text-sm mb-2">マルシェの魅力：
+                  <%= truncate(marche.description, length: 100) %>
                 </p>
               <% end %>
               
               <!-- 場所 -->
               <% if marche.location.present? %>
                 <div class="flex items-center text-gray-600 text-sm mb-3">
-                  <span class="mr-1"></span>
-                  <%= truncate(marche.location, length: 100) %>
+                  <span class="mr-1">開催場所：</span>
+                  <%= truncate(marche.venue, length: 100) %>
+                </div>
+              <% end %>
+
+              <% if marche.held_at.present? %>
+                <div class="flex items-center text-gray-600 text-sm mb-3">
+                <span class="mr-1">開催日：</span>
+              <%= marche.held_at.strftime("%Y年%m月%d日 %H:%M") %>
                 </div>
               <% end %>
 
@@ -93,6 +99,13 @@
                       </span>
                     <% end %>
                   </div>
+                </div>
+              <% end %>
+
+              <% if marche.end_at.present? %>
+                <div class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                <span class="mr-1">出店募集〆切：</span>
+              <%= marche.end_at.strftime("%Y年%m月%d日 %H:%M") %>
                 </div>
               <% end %>
 

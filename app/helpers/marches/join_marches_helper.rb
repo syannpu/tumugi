@@ -1,0 +1,2 @@
+module Marches::JoinMarchesHelper
+end
