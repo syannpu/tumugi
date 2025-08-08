@@ -1,25 +1,36 @@
-<h2>Change your password</h2>
+<div class="min-h-screen flex items-center justify-center bg-[oklch(95.3%_0.051_180.801)] py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <div>
+      <h2 class=" text-center text-4xl text-gray-500">
+      パスワード再設定
+      </h2>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.hidden_field :reset_password_token %>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+      <div class="field">
+        <%= f.label :password, "新しいパスワード", class: "block text-base text-xl text-gray-500 " %><br />
+       <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "border-4 border-orange-400/50 appearance-none rounded-md relative block w-full px-4 py-3 text-base" %>
+       <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> 文字以上)</em><br />
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation, "パスワード（確認用）", class: "block text-base text-xl text-gray-500 mt-6" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "border-4 border-orange-400/50 appearance-none rounded-md relative block w-full px-4 py-3 text-base" %>
+      </div>
+
+      <div class="actions flex justify-center">
+        <button class="inline-flex items-center justify-center px-6 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-full hover:from-orange-600 hover:to-orange-700 shadow-sm hover:shadow-md lg:px-4 lg:py-3 lg:w-auto transition-all duration-200 mt-6"
+           style="...">
+        パスワード変更
+        </button>
+      </div>
     <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+    <%= render "devise/shared/links" %>
+</div>
+</div>

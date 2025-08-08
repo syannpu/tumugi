@@ -22,6 +22,7 @@ class MypagesController < ApplicationController
   private
 
   def mypage_params
-    params.require(:user).permit(:username, :hometown, :gender, :age, :instagram, :image )
+    params.require(:user).permit(:username, :hometown, :gender, :age, :instagram, :image, :shop_name, :products, :experience,
+    :contact_info, :self_pr )
   end
 end

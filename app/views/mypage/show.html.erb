@@ -22,10 +22,10 @@
           </h4>
           
           <p class="text-xl text-gray-600 mb-8">
-            性別: <%= current_user.gender.present? ? current_user.gender : "未設定" %> <!-- ここを埋めてみてください -->
+            性別: <%= current_user.gender.present? ? current_user.gender : "未設定" %> 
           </p>
           <p class="text-xl text-gray-600 mb-8">
-            年齢: <%= current_user.age.present? ? current_user.age : "未設定" %> <!-- ここを埋めてみてください -->
+            年齢: <%= current_user.age.present? ? current_user.age : "未設定" %>
           </p>
 
           <p class="text-xl text-gray-600 mb-8">
@@ -39,6 +39,29 @@
                 未設定
               <% end %>
           </p>
+
+          <h5 class="text-xl font-bold text-gray-600 mb-8">出展者情報</h5>
+          <p class="text-xl text-gray-600 mb-8 mt-6">
+            ショップ名:<%= current_user.shop_name.present? ? current_user.shop_name : "未設定" %>
+          </p>
+
+          <p class="text-xl text-gray-600 mb-8">
+            商品:<%= current_user.products.present? ? current_user.products : "未設定" %>
+          </p>
+
+          <p class="text-xl text-gray-600 mb-8">
+            出店経験:<%= current_user.experience.present? ? current_user.experience : "未設定" %>
+          </p>
+
+          <p class="text-xl text-gray-600 mb-8">
+            連絡先:<%= current_user.contact_info.present? ? current_user.contact_info : "未設定" %>
+          </p>
+
+          <p class="text-xl text-gray-600 mb-8">
+            自己PR:<%= current_user.self_pr.present? ? current_user.self_pr : "未設定" %>
+          </p>
+
+
         </div>
       </div>      
       <!-- ボタン部分 -->

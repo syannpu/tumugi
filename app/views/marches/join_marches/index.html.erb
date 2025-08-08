@@ -1,13 +1,31 @@
 <h1 class="text-xl font-bold"><%= @marche.title %>の参加者管理</h1>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
   <% @join_marches.each do |join_marche| %>
-    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow w-120 h-150">
       <!-- 参加者情報 -->
       <div class="p-10">
-        <h3 class="text-xl font-bold"><%= join_marche.user.username %></h3>
-        <p class="text-xl text-gray-600">申請日: <%= join_marche.created_at.strftime("%Y/%m/%d") %></p>
+        <h3 class="text-xl font-bold mb-4">ショップ名：<%= join_marche.user.shop_name %></h3>
+        <p class="text-xl font-bold mb-4">商品：<%= join_marche.user.products %></p>
+        <p class="text-xl font-bold mb-4">出店回数：<%= join_marche.user.experience %></p>
+        <p class="text-xl font-bold mb-4">連絡先：<%= join_marche.user.contact_info %></p>
+        <p class="text-xl text-gray-600 mb-8">
+            Instagram: 
+              <% if join_marche.user.instagram.present? %>
+                <%= link_to "@#{join_marche.user.instagram}", 
+                 "https://instagram.com/#{join_marche.user.instagram}", 
+                  target: "_blank", 
+                  class: "text-pink-500 hover:underline" %>
+              <% else %>
+                未設定
+              <% end %>
+        </p>
+        自己PR：
+        <div class="border border-gray-500 p-4 rounded-md mb-4">
+        <p class="text-xl font-bold "><%= join_marche.user.self_pr %></p>
+        </div>
+        <p class="text-xl text-gray-600 mb-4">申請日: <%= join_marche.created_at.strftime("%Y/%m/%d") %></p>
         <p class="text-xl">現在のステータス: 
-          <span class="px-3 py-1 rounded bg-gray-100">
+          <span class="px-3 py-1 rounded bg-orange-100">
             <%= join_marche.approval_status_display %>
           </span>
         </p>
@@ -15,7 +33,7 @@
       
       <!-- 個別の更新フォーム -->
       <%= form_with model: [@marche, join_marche], method: :patch, class: "status-update-form" do |form| %>
-        <div class="flex items-center gap-3">
+        <div class="flex items-center justify-center gap-3">
           <%= form.select :approval_status, 
               options_for_select([
                 ['選定中', 'pending'],
