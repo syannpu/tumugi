@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.2.2", ">= 7.2.2.1"
+gem "rails", "~> 8.0.2"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 # Use postgresql as the database for Active Record
@@ -58,7 +58,7 @@ group :test do
   gem "selenium-webdriver"
 end
   gem "devise"
-  gem "rails-i18n", "~> 7.0.0"
+  gem "rails-i18n", "~> 8.0.1"
   gem "carrierwave", "2.2.2"
   gem 'ransack', '~> 4.0'
   gem 'letter_opener_web', '2.0.0'
