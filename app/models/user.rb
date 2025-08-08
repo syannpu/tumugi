@@ -16,4 +16,9 @@ class User < ApplicationRecord
   validates :gender, presence: true, inclusion: { in: ['男性', '女性', 'その他'] }, on: :registration
   validates :age, presence: true, numericality: { greater_than: 0, less_than: 150 },  on: :registration
   validates :instagram, format: { with: /\A@?[a-zA-Z0-9_.]+\z/ }, allow_blank: true,  on: :registration
+  validates :shop_name, presence: true, length: { maximum: 50 }, on: :registration
+  validates :products, presence: true, length: { maximum: 255 }, on: :registration
+  validates :experience, presence: true, inclusion: { in: ['初回', '2～5回', '6回以上'] }, on: :registration
+  validates :contact_info, presence: true, length: { maximum: 50 }, on: :registration
+  validates :self_pr, presence: true, length: { maximum: 255 }, on: :registration
 end
