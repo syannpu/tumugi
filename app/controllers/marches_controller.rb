@@ -1,7 +1,7 @@
 class MarchesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_marche, only: [ :edit, :update, :destroy ]
-  before_action :ensure_authorized_access, only: [:participants_info]
+  before_action :ensure_authorized_access, only: [ :participants_info ]
 
   def index
     @search = Marche.ransack(params[:q])
@@ -30,15 +30,15 @@ class MarchesController < ApplicationController
 
   def show
     @marche = Marche.find(params[:id])
-    @search = Marche.ransack(params[:q]) 
-  
+    @search = Marche.ransack(params[:q])
+
     if @marche.user == current_user
       # 開催者向けビュー
       @join_marches = @marche.join_marches.includes(:user)
-    
+
     else
       # 一般ユーザー向けビュー
-      render 'show'
+      render "show"
     end
   end
 
@@ -51,12 +51,12 @@ class MarchesController < ApplicationController
   def update
     if @marche.update(marche_params.except(:images))
       if params[:marche][:images].present?
-      # 既存の画像を保持しつつ、新しい画像を追加
+        # 既存の画像を保持しつつ、新しい画像を追加
         new_images = params[:marche][:images].reject(&:blank?)
         @marche.images = @marche.images + new_images  # 既存 + 新規
         @marche.save
       end
-      redirect_to @marche, notice: 'マルシェが更新されました'
+      redirect_to @marche, notice: "マルシェが更新されました"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -77,12 +77,12 @@ class MarchesController < ApplicationController
 
   def ensure_authorized_access
     @marche = Marche.find(params[:id])
-    
+
     # 開催者かチェック
     if @marche.user == current_user
       return true
     end
-    
+
     # 確定した出展者かチェック
     @my_application = current_user.join_marches.find_by(marche: @marche)
     unless @my_application&.approved?
