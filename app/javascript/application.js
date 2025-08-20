@@ -2,3 +2,5 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "./dropdown"
+import "./smooth-scroll"
+import "./marche_auto_slider"

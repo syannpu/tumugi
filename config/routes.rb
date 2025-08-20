@@ -7,22 +7,27 @@ Rails.application.routes.draw do
    passwords: "users/passwords"
    }
   root "homes#index"
+  get "how_to_use", to: "homes#how_to_use"
 
   devise_scope :user do
     delete "logout", to: "users/sessions#destroy", as: :logout
   end
-  
+
   resources :posts, only: %i[index new create show edit update destroy]
 
   resources :marches, only: %i[index new create show edit update destroy] do
-    resources :join_marches, only: [:index, :update], controller: 'marches/join_marches'
-    get :participants_info, on: :member 
+    resources :join_marches, only: [ :index, :update ], controller: "marches/join_marches"
+    member do
+      get :participants_info
+      get :participants_info_edit     
+      patch :participants_info_update
+    end
   end
-  
-  resource :mypage, only: [:show, :edit, :update]
+
+  resource :mypage, only: [ :show, :edit, :update ]
 
   namespace :mypage do
-    resources :join_marches, only: [:create, :index, :destroy]
+    resources :join_marches, only: [ :create, :index, :destroy ]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

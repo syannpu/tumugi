@@ -1,0 +1,47 @@
+<div class="container mx-auto px-4">
+  <!-- ヘッダー部分 -->
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-center mt-10"><%= @marche.title %></h1>
+    <p class="text-gray-600 font-bold ">確定した出展者限定の情報ページです</p>
+  </div>
+
+  <%= form_with(model: @marche, 
+                url: participants_info_update_marche_path(@marche),
+                enctype: "multipart/form-data") do |form| %>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 h-150">
+      <!-- 左：マルシェ詳細 -->
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h3 class="text-lg font-bold border-b border-gray-200 pb-4 mb-4">マルシェ詳細</h3>
+        <div class="space-y-3">
+          <p><strong>開催日:</strong> <%= @marche.start_at %></p>
+          <p><strong>開催場所:</strong> <%= @marche.location %></p>
+          <p><strong>詳細:</strong> <%= simple_format(@marche.body) %></p>
+          <p><strong>確定した参加者</strong> (<%= @approved_participants.count %>名)</p>
+        </div>
+      </div>
+      
+      <!-- 中央：スケジュール部分 -->
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h3 class="text-lg font-bold border-b border-gray-200 pb-4 mb-4">当日スケジュール</h3>
+        <div class="space-y-3">
+          <%= form.text_area :schedule, class: "w-110 h-150 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+        </div>
+      </div>
+
+      <!-- 右：画像アップロード部分 -->
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h3 class="text-lg font-bold border-b border-gray-200 pb-4 mb-4">マルシェ配置</h3>
+        <%= form.file_field :layout_image, 
+            accept: "image/*", 
+            class: "w-110 h-150 px-2 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>  
+      </div>
+    </div>
+    
+    <!-- 送信ボタン -->
+    <div class="text-right">
+      <%= form.submit "更新する", class: "px-6 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-full hover:from-orange-600 hover:to-orange-700 shadow-sm hover:shadow-md lg:px-4 lg:py-2 lg:w-auto transition-all duration-200 mt-24" %>
+    </div>
+    
+  <% end %>
+</div>

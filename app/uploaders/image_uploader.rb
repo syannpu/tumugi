@@ -15,11 +15,11 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   def default_url
     case model.class.name
-    when 'User'
+    when "User"
       "user_placeholder.png"
-    when 'Post'
+    when "Post"
       "post_placeholder.png"
-    when 'Marche'
+    when "Marche"
       "marche_placeholder.png"
     else
       "default_placeholder.png"

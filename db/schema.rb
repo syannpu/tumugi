@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_08_08_022927) do
+ActiveRecord::Schema[7.2].define(version: 2025_08_12_025624) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,6 +72,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_08_022927) do
     t.datetime "held_at"
     t.string "description"
     t.string "venue"
+    t.text "schedule"
+    t.string "layout_image"
     t.index ["user_id"], name: "index_marches_on_user_id"
   end
 

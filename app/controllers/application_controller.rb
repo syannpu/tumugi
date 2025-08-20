@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :hometown, :gender, :age]) # 必要に応じてカスタマイズ
+    devise_parameter_sanitizer.permit(:sign_up, keys: [ :username, :hometown, :gender, :age ]) # 必要に応じてカスタマイズ
     devise_parameter_sanitizer.permit(:sign_in, keys: []) # メールアドレスとパスワードだけに制限
   end
 end

@@ -1,7 +1,7 @@
 class MarchesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_marche, only: [ :edit, :update, :destroy ]
-  before_action :ensure_authorized_access, only: [:participants_info]
+  before_action :set_marche, only: [ :edit, :update, :destroy]
+  before_action :ensure_authorized_access, only: [ :participants_info, :participants_info_update ]
 
   def index
     @search = Marche.ransack(params[:q])
@@ -16,7 +16,7 @@ class MarchesController < ApplicationController
   end
 
   def create
-    @marche = current_user.marches.build(marche_params)
+    @marche = current_user.marches.build(marche_params_for_create)
 
     if @marche.save
       redirect_to marches_path
@@ -30,15 +30,15 @@ class MarchesController < ApplicationController
 
   def show
     @marche = Marche.find(params[:id])
-    @search = Marche.ransack(params[:q]) 
-  
+    @search = Marche.ransack(params[:q])
+
     if @marche.user == current_user
       # 開催者向けビュー
       @join_marches = @marche.join_marches.includes(:user)
-    
+
     else
       # 一般ユーザー向けビュー
-      render 'show'
+      render "show"
     end
   end
 
@@ -51,12 +51,12 @@ class MarchesController < ApplicationController
   def update
     if @marche.update(marche_params.except(:images))
       if params[:marche][:images].present?
-      # 既存の画像を保持しつつ、新しい画像を追加
+        # 既存の画像を保持しつつ、新しい画像を追加
         new_images = params[:marche][:images].reject(&:blank?)
         @marche.images = @marche.images + new_images  # 既存 + 新規
         @marche.save
       end
-      redirect_to @marche, notice: 'マルシェが更新されました'
+      redirect_to @marche, notice: "マルシェが更新されました"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -73,16 +73,30 @@ class MarchesController < ApplicationController
     @my_application = current_user.join_marches.find_by(marche: @marche)
   end
 
+  def participants_info_edit
+    @marche = Marche.find(params[:id])
+    @approved_participants = @marche.join_marches.approved.includes(:user)
+  end
+
+  def participants_info_update
+  # 編集時のみscheduleとlayout_imageを受け取る
+    @marche = Marche.find(params[:id])
+    @marche.update(marche_params_for_edit)
+    @approved_participants = @marche.join_marches.approved.includes(:user)
+
+    redirect_to participants_info_marche_path(@marche), success: '参加者情報を更新しました'
+  end
+
   private
 
   def ensure_authorized_access
     @marche = Marche.find(params[:id])
-    
+
     # 開催者かチェック
     if @marche.user == current_user
       return true
     end
-    
+
     # 確定した出展者かチェック
     @my_application = current_user.join_marches.find_by(marche: @marche)
     unless @my_application&.approved?
@@ -95,7 +109,12 @@ class MarchesController < ApplicationController
     @marche = current_user.marches.find(params[:id])
   end
 
-  def marche_params
+  def marche_params_for_edit
+    params.require(:marche).permit(:title, :body, :location, :held_at, :schedule, :layout_image)
+  # 編集時は必要なパラメータのみ
+  end
+
+  def marche_params_for_create
     params.require(:marche).permit(:title, :body, :location, :venue, { images: [] }, :description, :start_at, :end_at, :held_at, atmosphere_ids: [], target_ids: [], price_ids: [])
   end
 end

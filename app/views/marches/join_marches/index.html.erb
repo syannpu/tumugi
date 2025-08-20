@@ -42,9 +42,13 @@
               ], join_marche.approval_status),
               {},
               { class: 'form-select border rounded px-3 py-1' } %>
+
           
           <%= form.submit "更新", 
               class: 'bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded transition-colors' %>
+          <% if join_marche.approval_status == "approved" %>
+              <%= link_to "共有", participants_info_marche_path(join_marche.marche_id), class: "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors" %>
+          <% end %>
         </div>
       <% end %>
     </div>

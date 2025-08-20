@@ -1,0 +1,203 @@
+<div class="usage-guide">
+  <h2>アプリの使い方</h2>
+  <div class="flex items-center justify-center">
+    <div class="grid grid-cols-2 gap-2">
+    <!-- 左側：ステップ1 -->
+      <div class="flex flex-col items-center justify-start space-y-2 mb-10">
+        <button class="self-start inline-flex px-6 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-full hover:from-orange-600 hover:to-orange-700 shadow-sm hover:shadow-md lg:px-6 lg:py-3 lg:w-auto transition-all duration-200 mb-6">ステップ1</button>
+          <h3 class="font-bold text-xl">ログイン</h3>
+          <p>メールアドレスとパスワードを入力してログインしてください</p>
+          <%= image_tag "screenshots/dashboard.png", class: "screenshot w-100 h-auto" %>
+      </div>
+  
+    <!-- 右側：ログイン後画面 -->
+      <div class="flex flex-col items-center justify-start space-y-10 mt-20 mb-26 ">
+        <p>ログイン後画面</p>
+        <%= image_tag "screenshots/dashboard1.jpg", class: "screenshot w-100 h-auto" %>
+        <%= image_tag "screenshots/dashboard2.png", class: "screenshot w-140 h-auto" %>
+      </div>
+    </div>
+  </div>
+
+    <div class="flex justify-center space-x-34 mb-24">
+      <button class="btn-organizer inline-flex px-6 py-3 font-medium text-white bg-gradient-to-r from-red-500 to-red-400 rounded-full hover:from-red-400 hover:to-red-400 shadow-sm hover:shadow-md lg:px-14 lg:py-5 lg:w-auto transition-all duration-100">開催者の方</button>
+      <button class="btn-exhibitor inline-flex px-6 py-3 font-medium text-white bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-full hover:from-yellow-400 hover:to-yellow-400 shadow-sm hover:shadow-md lg:px-14 lg:py-5 lg:w-auto transition-all duration-100">出展者の方</button>
+      <button class="btn-participant inline-flex px-6 py-3 font-medium text-white bg-gradient-to-r from-green-500 to-green-500 rounded-full hover:from-green-400 hover:to-green-400 shadow-sm hover:shadow-md lg:px-14 lg:py-5 lg:w-auto transition-all duration-100">参加者の方</button>
+    </div>
+
+    <div id="organizer-section">
+      <h2 class="font-bold text-3xl underline mb-5">開催者向け使い方</h2>
+    <!-- 開催者向けの説明内容 -->
+    </div>
+  <div class="grid grid-cols-4 gap-4">
+    <div class="step">
+      <div class="flex items-center justify-start space-x-4 mb-4 mt-4">
+        <button class="inline-flex px-6 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-full hover:from-orange-600 hover:to-orange-700 shadow-sm hover:shadow-md lg:px-6 lg:py-3 lg:w-auto transition-all duration-200">
+        ステップ1
+        </button>
+        <h3 class="font-bold text-xl">マルシェ作成</h3>
+      </div>  
+      <p>各項目を入力して自分のマルシェの魅力を伝えましょう</p>
+      <%= image_tag "screenshots/dashboard3.png", class: "screenshot w-60 h-auto mt-8" %>
+    </div>
+
+     <div class="step mt-24">
+      <p>作成したマルシェ</p>
+      <%= image_tag "screenshots/dashboard5.png", class: "screenshot w-150 h-auto mt-8 " %>
+    </div>
+
+    <div class="step">
+      <div class="flex items-center justify-start space-x-4 mb-4 mt-4">
+        <button class="inline-flex px-6 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-full hover:from-orange-600 hover:to-orange-700 shadow-sm hover:shadow-md lg:px-6 lg:py-3 lg:w-auto transition-all duration-200">
+        ステップ2
+        </button>
+        <h3 class="font-bold text-xl">Myページ/Myマルシェを確認</h3>
+    </div>  
+      <p>作成したマルシェが表示されています</p>
+      <p>出店申請がある場合</p>
+      <%= image_tag "screenshots/dashboard7.png", class: "screenshot w-96 h-auto mt-8" %>
+    </div>
+
+    <div class="step mt-16">
+      <p>出展者情報が表示されます</p>
+      <p>ステータスは「選定中」で登録されます</p>
+      <%= image_tag "screenshots/dashboard9.png", class: "screenshot w-90 h-auto mt-8 " %>
+    </div>
+
+    <div class="step">
+      <div class="flex items-center justify-start space-x-4 mb-4 mt-4">
+        <button class="inline-flex px-6 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-full hover:from-orange-600 hover:to-orange-700 shadow-sm hover:shadow-md lg:px-6 lg:py-3 lg:w-auto transition-all duration-200">
+        ステップ3
+        </button>
+        <h3 class="font-bold text-xl">出展者確定</h3>
+      </div>  
+      <p>自身のマルシェに出店してもらう出展者を決めよう</p>
+      <p>「確定」と更新すると「共有」の痰が表示されます</p>
+      <%= image_tag "screenshots/dashboard10.png", class: "screenshot w-90 h-auto mt-8" %>
+    </div>
+
+    <div class="step mt-20">
+      <p>マルシェの詳細・当日スケジュール・マルシェの配置</p>
+      <p>開催者のみ情報を更新可能です</p>
+      <%= image_tag "screenshots/dashboard11.png", class: "screenshot w-90 h-auto mt-8 " %>
+    </div>
+
+    <div class="step">
+      <div class="flex items-center justify-start space-x-4 mb-4 mt-4">
+        <button class="inline-flex px-6 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-full hover:from-orange-600 hover:to-orange-700 shadow-sm hover:shadow-md lg:px-6 lg:py-3 lg:w-auto transition-all duration-200">
+        ステップ4
+        </button>
+        <h3 class="font-bold text-xl">出展者をお断わりする場合</h3>
+      </div>  
+      <p>現在のステータスを「お断り」に変更し</p>
+      <p>更新してください</p>
+      <%= image_tag "screenshots/dashboard12.png", class: "screenshot w-150 h-auto mt-8" %>
+    </div>
+
+    <div class="step mt-20">
+      <p>出展者側のステータスも「お断り」になります</p>
+      <p>出展者側が出店を取り消すと申請者数に反映されます</p>
+      <%= image_tag "screenshots/dashboard13.png", class: "screenshot w-90 h-auto mt-8 " %>
+    </div>
+  </div>
+
+    <div id="exhibitor-section">
+      <h2 class="font-bold text-3xl underline mb-5">出展者向け使い方</h2>
+    <!-- 開催者向けの説明内容 -->
+    </div>
+  <div class="grid grid-cols-4 gap-4">
+    <div class="step">
+      <div class="flex items-center justify-start space-x-4 mb-4 mt-4">
+        <button class="inline-flex px-6 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-full hover:from-orange-600 hover:to-orange-700 shadow-sm hover:shadow-md lg:px-6 lg:py-3 lg:w-auto transition-all duration-200">
+        ステップ1
+        </button>
+        <h3 class="font-bold text-xl">マルシェ検索</h3>
+      </div>  
+      <p>開催日、開催場所、キーワードを入力して</p>
+      <p>自分好みのマルシェを見つけよう</p>
+      <%= image_tag "screenshots/dashboard14.png", class: "screenshot w-120 h-auto mt-8" %>
+    </div>
+
+    <div class="step mt-8">
+      <p>検索結果</p>
+      <%= image_tag "screenshots/dashboard15.png", class: "screenshot w-76 h-auto mt-4 " %>
+    </div>
+
+    <div class="step">
+      <div class="flex items-center justify-start space-x-4 mb-4 mt-4">
+        <button class="inline-flex px-6 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-full hover:from-orange-600 hover:to-orange-700 shadow-sm hover:shadow-md lg:px-6 lg:py-3 lg:w-auto transition-all duration-200">
+        ステップ2
+        </button>
+        <h3 class="font-bold text-xl">マルシェに出店</h3>
+      </div>  
+      <p>「このマルシェに出店する」をクリックすると</p>
+      <p>出店完了になります</p>
+      <%= image_tag "screenshots/dashboard16.png", class: "screenshot w-100 h-auto mt-8" %>
+    </div>
+
+     <div class="step mt-18">
+      <p>自動的にMyマルシェの出店申請マルシェ一覧に</p>
+      <p>反映されます</p>
+      <%= image_tag "screenshots/dashboard17.png", class: "screenshot w-150 h-auto mt-4 " %>
+    </div>
+
+    <div class="step">
+      <div class="flex items-center justify-start space-x-4 mb-4 mt-4">
+        <button class="inline-flex px-6 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-full hover:from-orange-600 hover:to-orange-700 shadow-sm hover:shadow-md lg:px-6 lg:py-3 lg:w-auto transition-all duration-200">
+        ステップ3
+        </button>
+        <h3 class="font-bold text-xl">マルシェ出店確定</h3>
+      </div>  
+      <p>開催者が出展者を確定すると</p>
+      <p>ステータスが「確定」に自動で更新されます</p>
+      <p>確定すると「共有」ボタンが表示され</p>
+      <p>マルシェの詳細情報が確認できます</p>
+      <%= image_tag "screenshots/dashboard18.png", class: "screenshot w-120 h-auto mt-8 mb-5" %>
+    </div>
+
+    <div class="step mt-8">
+      <p>共有内容（マルシェ詳細、当日スケジュール、ブース配置）</p>
+      <%= image_tag "screenshots/dashboard19.png", class: "screenshot w-90 h-auto mt-4 " %>
+    </div>
+
+    <div class="step">
+      <div class="flex items-center justify-start space-x-4 mb-4 mt-4">
+        <button class="inline-flex px-6 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-full hover:from-orange-600 hover:to-orange-700 shadow-sm hover:shadow-md lg:px-6 lg:py-3 lg:w-auto transition-all duration-200">
+        ステップ4
+        </button>
+        <h3 class="font-bold text-xl">マルシェ出店取り消し</h3>
+      </div>  
+      <p>「参加取り消し」ボタンをクリック</p>
+      <p>「参加申請が取り消されます</p>
+      <%= image_tag "screenshots/dashboard20.png", class: "screenshot w-120 h-auto mt-8" %>
+    </div>
+
+    <div class="step mt-8">
+      <p>出品申請マルシェ一覧から参加申請が消えます</p>
+      <%= image_tag "screenshots/dashboard21.png", class: "screenshot w-90 h-auto mt-4 " %>
+    </div>
+  </div>
+
+    <div id="participant-section">
+      <h2 class="font-bold text-3xl mb-5 underline">参加者向け使い方</h2>
+    <!-- 参加者向けの説明内容 -->
+    </div>
+    
+    <div class="grid grid-cols-4 gap-4">
+      <div class="step">
+        <div class="flex items-center justify-start space-x-4 mb-4 mt-4">
+          <button class="inline-flex px-6 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-full hover:from-orange-600 hover:to-orange-700 shadow-sm hover:shadow-md lg:px-6 lg:py-3 lg:w-auto transition-all duration-200">
+          ステップ1
+          </button>
+            <h3 class="font-bold text-xl">マルシェ検索</h3>
+        </div>  
+          <p>開催日、開催場所、キーワードを入力して</p>
+          <p>自分好みのマルシェを見つけて参加しよう</p>
+          <%= image_tag "screenshots/dashboard14.png", class: "screenshot w-120 h-auto mt-8" %>
+      </div>  
+        <div class="step mt-8">
+          <p>検索結果</p>
+          <%= image_tag "screenshots/dashboard15.png", class: "screenshot w-76 h-auto mt-4 " %>
+        </div> 
+    </div>
+</div>
