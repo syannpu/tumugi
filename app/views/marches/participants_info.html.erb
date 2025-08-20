@@ -23,7 +23,7 @@
       <h3 class="text-lg font-bold border-b border-gray-200 pb-4 mb-4">当日スケジュール</h3>
       <div class="space-y-3">
         <!-- スケジュール内容をここに追加 -->
-        <p class="text-gray-600">スケジュール内容は今後実装予定です。</p>
+        <p><%= simple_format(@marche.schedule) %></p>
       </div>
     </div>
 
@@ -31,10 +31,15 @@
     <div class="bg-white shadow-md rounded-lg p-6">
       <h3 class="text-lg font-bold border-b border-gray-200 pb-4 mb-4">マルシェ配置</h3>
       <div class="space-y-3">
-        <!-- 画像アップロード機能をここに追加 -->
-        <p class="text-gray-600">画像アップロード機能は今後実装予定です。</p>
+        <% if @marche.layout_image.present? %>
+            <%= image_tag @marche.layout_image.url, class: "..." %>
+        <% end %>
       </div>
     </div>
+    
+      <%= link_to "編集する", participants_info_edit_marche_path(@marche), 
+        id: "button-edit-#{@marche.id}",
+        class: "h-12 w-26 inline-flex items-center px-4 py-2 border border-orange-300 shadow-sm text-sm font-medium rounded-md text-orange-700 bg-white hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-400 transition-colors duration-200" %>
   </div>
 </div>
 

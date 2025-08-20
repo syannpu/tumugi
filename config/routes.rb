@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :marches, only: %i[index new create show edit update destroy] do
     resources :join_marches, only: [ :index, :update ], controller: "marches/join_marches"
     member do
-      get :participants_info, 
+      get :participants_info
       get :participants_info_edit     
       patch :participants_info_update
     end

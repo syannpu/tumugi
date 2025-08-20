@@ -1,7 +1,7 @@
 class MarchesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_marche, only: [ :edit, :update, :destroy ]
-  before_action :ensure_authorized_access, only: [ :participants_info ]
+  before_action :set_marche, only: [ :edit, :update, :destroy]
+  before_action :ensure_authorized_access, only: [ :participants_info, :participants_info_update ]
 
   def index
     @search = Marche.ransack(params[:q])
@@ -16,7 +16,7 @@ class MarchesController < ApplicationController
   end
 
   def create
-    @marche = current_user.marches.build(marche_params)
+    @marche = current_user.marches.build(marche_params_for_create)
 
     if @marche.save
       redirect_to marches_path
@@ -73,6 +73,20 @@ class MarchesController < ApplicationController
     @my_application = current_user.join_marches.find_by(marche: @marche)
   end
 
+  def participants_info_edit
+    @marche = Marche.find(params[:id])
+    @approved_participants = @marche.join_marches.approved.includes(:user)
+  end
+
+  def participants_info_update
+  # 編集時のみscheduleとlayout_imageを受け取る
+    @marche = Marche.find(params[:id])
+    @marche.update(marche_params_for_edit)
+    @approved_participants = @marche.join_marches.approved.includes(:user)
+
+    redirect_to participants_info_marche_path(@marche), success: '参加者情報を更新しました'
+  end
+
   private
 
   def ensure_authorized_access
@@ -95,7 +109,12 @@ class MarchesController < ApplicationController
     @marche = current_user.marches.find(params[:id])
   end
 
-  def marche_params
+  def marche_params_for_edit
+    params.require(:marche).permit(:title, :body, :location, :held_at, :schedule, :layout_image)
+  # 編集時は必要なパラメータのみ
+  end
+
+  def marche_params_for_create
     params.require(:marche).permit(:title, :body, :location, :venue, { images: [] }, :description, :start_at, :end_at, :held_at, atmosphere_ids: [], target_ids: [], price_ids: [])
   end
 end

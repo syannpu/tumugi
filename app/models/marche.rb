@@ -5,6 +5,7 @@ class Marche < ApplicationRecord
 
   belongs_to :user
   mount_uploaders :images, ImageUploader
+  mount_uploader :layout_image, LayoutImageUploader
   has_many :marche_atmospheres, dependent: :destroy
   has_many :atmospheres, through: :marche_atmospheres, source: :atmosphere
   has_many :marche_targets, dependent: :destroy
