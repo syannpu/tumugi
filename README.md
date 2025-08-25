@@ -92,11 +92,11 @@ AIが商品の特徴（素材、用途、過去の売上データなど）を分
 画面遷移図
 Figma：https://www.figma.com/design/UxVtNljzz6vBCszOyxYARU/Autoflow--Community-?node-id=0-1&p=f&t=CI5Z0kpDPcTFqxa0-0
 
-■ READMEに記載した機能
+READMEに記載した機能
 - [x] ユーザー登録機能
-- [x]ログイン機能
-- [x]パスワード変更機能
-- [x]メールアドレス変更機能
+- [x] ログイン機能
+- [x] パスワード変更機能
+- [x] メールアドレス変更機能
 - [x] 記事投稿機能
 - [x] 記事閲覧機能
 - [x] 記事編集機能
