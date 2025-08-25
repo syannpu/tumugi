@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :join_marches, only: [ :index, :update ], controller: "marches/join_marches"
     member do
       get :participants_info
-      get :participants_info_edit     
+      get :participants_info_edit
       patch :participants_info_update
     end
   end
