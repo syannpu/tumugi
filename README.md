@@ -1,6 +1,5 @@
 ER図
-[![Image from Gyazo](https://i.gyazo.com/5a285e2ad43f1a9a1e30efe3e6fb6924.png)](https://gyazo.com/5a285e2ad43f1a9a1e30efe3e6fb6924)
-
+[![Image from Gyazo](https://i.gyazo.com/1031ad50ae4d6f287abe7e3aa2680f14.png)](https://gyazo.com/1031ad50ae4d6f287abe7e3aa2680f14)
 ■サービス 「つむぎマルシェ」
 
 ■サービス概要 「つむぎマルシェ」は、マルシェの開催者・出店者・来場者をつなぐことを目的としたプラットフォームです。 このサービスでは、三者が抱える課題を解消し、より良い出会いとつながりを生み出します。
