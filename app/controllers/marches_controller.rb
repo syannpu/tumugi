@@ -49,7 +49,7 @@ class MarchesController < ApplicationController
   end
 
   def update
-    if @marche.update(marche_params.except(:images))
+    if @marche.update(marche_params_for_create.except(:images))
       if params[:marche][:images].present?
         # 既存の画像を保持しつつ、新しい画像を追加
         new_images = params[:marche][:images].reject(&:blank?)
