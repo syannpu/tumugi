@@ -1,15 +1,14 @@
 <div class="relative">
   <!-- トリガーボタン -->
-  <%= link_to '#', 
-      class: 'nav-link cursor-pointer text-gray-600 hover:text-gray-800 px-4 py-2', 
+  <%= button_tag type: 'button',
+      class: 'nav-link cursor-pointer text-gray-600 hover:text-gray-800 px-4 py-2',
       id: "#{trigger_id}-dropdown-trigger" do %>
-        <% if local_assigns[:trigger_icon] %>
-          <%= trigger_icon.html_safe %>
-        <% else %>
-          <%= trigger_text %>
-        <% end %>
-      <% end %>
-  
+    <% if local_assigns[:trigger_icon] %>
+      <%= trigger_icon.html_safe %>
+    <% else %>
+      <%= trigger_text %>
+    <% end %>
+  <% end %>
   <!-- ドロップダウンメニュー -->
   <div id="<%= trigger_id %>-dropdown-menu" 
        class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg">
