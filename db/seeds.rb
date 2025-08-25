@@ -38,5 +38,3 @@ Target.find_or_create_by!(name: '一点ものを探している方')
 Target.find_or_create_by!(name: '新鮮な食材を求めている方')
 Target.find_or_create_by!(name: '新しい趣味を見つけたい方')
 Target.find_or_create_by!(name: '親子で楽しみたい方')
-
-
