@@ -62,3 +62,4 @@ end
   gem "carrierwave", "2.2.2"
   gem "ransack", "~> 4.0"
   gem "letter_opener_web", "2.0.0"
+  gem 'meta-tags'
