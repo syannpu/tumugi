@@ -81,4 +81,13 @@
      </div>
     </div>
   </article>
+    <% set_meta_tags(
+      title: "#{@marche.title} - つむぎマルシェ",
+      description: @marche.description,
+      og: {
+      title: @marche.title,
+      description: @marche.description,
+      image: @marche.images.first.present? ? image_url(@marche.images.first.url) : image_url('default.png')
+      }
+    ) %>
 </div>
