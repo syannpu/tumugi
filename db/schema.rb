@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_08_12_025624) do
+ActiveRecord::Schema[7.2].define(version: 2025_08_27_034803) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,6 +28,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_12_025624) do
     t.datetime "updated_at", null: false
     t.index ["marche_id"], name: "index_join_marches_on_marche_id"
     t.index ["user_id"], name: "index_join_marches_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "marche_atmospheres", force: :cascade do |t|
@@ -124,6 +133,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_12_025624) do
 
   add_foreign_key "join_marches", "marches"
   add_foreign_key "join_marches", "users"
+  add_foreign_key "likes", "posts"
+  add_foreign_key "likes", "users"
   add_foreign_key "marche_atmospheres", "atmospheres"
   add_foreign_key "marche_atmospheres", "marches"
   add_foreign_key "marche_prices", "marches"

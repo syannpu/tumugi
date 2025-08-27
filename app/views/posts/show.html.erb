@@ -29,6 +29,15 @@
         id: "button-delete-#{@post.id}",
         data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
         class: "inline-flex items-center px-4 py-2 border border-red-300 shadow-sm text-sm font-medium rounded-md text-red-900 bg-white hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-600 transition-colors duration-200" %>
+        <% if current_user.liked?(@post) %>
+          <%= button_to post_likes_path(@post), method: :delete, class: "text-2xl text-red-500" do %>
+          <i class="fas fa-heart"></i>
+          <% end %>
+        <% else %>
+          <%= button_to post_likes_path(@post), method: :post, class: "text-2xl text-gray-500" do %>
+          <i class="far fa-heart"></i>
+         <% end %>
+        <% end %>
      </div>
     </div>
   </article>
