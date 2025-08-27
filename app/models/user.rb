@@ -11,6 +11,8 @@ class User < ApplicationRecord
   validates :username, presence: true, length: { maximum: 50 }, uniqueness: true, on: :registration
   has_many :join_marches, dependent: :destroy
   has_many :joined_marches, through: :join_marches, source: :marche
+  has_many :likes, dependent: :destroy
+  has_many :liked_posts, through: :likes, source: :post
 
   validates :hometown, presence: true, on: :registration
   validates :gender, presence: true, inclusion: { in: [ "男性", "女性", "その他" ] }, on: :registration
@@ -21,4 +23,16 @@ class User < ApplicationRecord
   validates :experience, presence: true, inclusion: { in: [ "初回", "2～5回", "6回以上" ] }, on: :registration
   validates :contact_info, presence: true, length: { maximum: 50 }, on: :registration
   validates :self_pr, presence: true, length: { maximum: 255 }, on: :registration
+
+  def like(post)
+    liked_posts << post
+  end
+
+  def unlike(post)
+    liked_posts.destroy(post)
+  end
+
+  def liked?(post)
+    liked_posts.include?(post)
+  end
 end

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "likes/create"
+  get "likes/destroy"
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   devise_for :users, controllers: {
@@ -13,7 +15,10 @@ Rails.application.routes.draw do
     delete "logout", to: "users/sessions#destroy", as: :logout
   end
 
-  resources :posts, only: %i[index new create show edit update destroy]
+  resources :posts, only: %i[index new create show edit update destroy] do
+    resource :likes, only: %i[create destroy index]
+  end
+  resources :likes, only: [ :index ]
 
   resources :marches, only: %i[index new create show edit update destroy] do
     resources :join_marches, only: [ :index, :update ], controller: "marches/join_marches"
