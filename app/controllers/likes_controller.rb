@@ -13,7 +13,7 @@ class LikesController < ApplicationController
 
   def destroy
     current_user.unlike(@post)
-    redirect_to @post, notice: "いいねを解除しました。"
+    redirect_to @post, notice: "いいねを解除しました"
   end
 
   private

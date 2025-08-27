@@ -13,7 +13,9 @@ class User < ApplicationRecord
   has_many :joined_marches, through: :join_marches, source: :marche
   has_many :likes, dependent: :destroy
   has_many :liked_posts, through: :likes, source: :post
-
+  has_many :bookmarks, dependent: :destroy
+  has_many :bookmark_marches, through: :bookmarks, source: :marche
+ 
   validates :hometown, presence: true, on: :registration
   validates :gender, presence: true, inclusion: { in: [ "男性", "女性", "その他" ] }, on: :registration
   validates :age, presence: true, numericality: { greater_than: 0, less_than: 150 },  on: :registration
@@ -34,5 +36,17 @@ class User < ApplicationRecord
 
   def liked?(post)
     liked_posts.include?(post)
+  end
+
+  def bookmark(marche)
+    bookmark_marches << marche
+  end
+
+  def unbookmark(marche)
+    bookmark_marches.destroy(marche)
+  end
+
+  def bookmark?(marche)
+    bookmark_marches.include?(marche)
   end
 end
