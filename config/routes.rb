@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resource :likes, only: %i[create destroy index]
   end
   resources :likes, only: [ :index ]
-
+ 
   resources :marches, only: %i[index new create show edit update destroy] do
     resources :join_marches, only: [ :index, :update ], controller: "marches/join_marches"
     member do
@@ -27,6 +27,10 @@ Rails.application.routes.draw do
       get :participants_info_edit
       patch :participants_info_update
     end
+    collection do
+      get :bookmarks  # /marches/bookmarks
+    end
+    resources :bookmarks, only: [:create, :destroy]
   end
 
   resource :mypage, only: [ :show, :edit, :update ]

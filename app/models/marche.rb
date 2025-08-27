@@ -13,6 +13,7 @@ class Marche < ApplicationRecord
   has_many :marche_prices, dependent: :destroy
   has_many :prices, through: :marche_prices, source: :price
   has_many :join_marches
+  has_many :bookmarks, dependent: :destroy
 
   def self.ransackable_attributes(auth_object = nil)
     [ "body", "created_at", "end_at", "id", "location", "start_at", "title", "updated_at", "user_id", "held_at" ]

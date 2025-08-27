@@ -78,6 +78,16 @@
               data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
               class: "inline-flex items-center px-4 py-2 border border-red-300 shadow-sm text-sm font-medium rounded-md text-red-900 bg-white hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-600 transition-colors duration-200" %>
           <% end %>
+          <% if current_user.bookmark?(@marche) %>
+            <% bookmark = current_user.bookmarks.find_by(marche_id: @marche.id) %>
+            <%= button_to marche_bookmark_path(@marche, bookmark), method: :delete, class: "text-2xl text-yellow-500" do %>
+            <i class="far fa-star"></i>
+            <% end %>
+          <% else %>
+            <%= button_to marche_bookmarks_path(@marche), method: :post, class: "text-2xl text-gray-500" do %>
+            <i class="far fa-star"></i>
+            <% end %>
+          <% end %>
      </div>
     </div>
   </article>

@@ -87,6 +87,10 @@ class MarchesController < ApplicationController
     redirect_to participants_info_marche_path(@marche), success: "参加者情報を更新しました"
   end
 
+  def bookmarks
+    @bookmark_marches = current_user.bookmark_marches.includes(:atmospheres, :targets, :prices)
+  end
+
   private
 
   def ensure_authorized_access

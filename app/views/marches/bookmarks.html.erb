@@ -1,19 +1,7 @@
-<% content_for(:title, 'マルシェ検索') %>
-
-<div class="min-h-screen bg-gray-50">
-  <div class="container mx-auto px-12 py-20">
-    <div class="text-center mb-8">
-      <h1 class="text-4xl font-bold text-blue-600 mb-4">
-        🔍 マルシェ検索
-      </h1>
-      <p class="text-xl text-gray-600">お気に入りのマルシェを見つけよう</p>
-    </div>
-    
-    <%= render 'search_form' %>
-    
-    <div class="container mx-auto px-2 py-4">
+<h2 class="text-xl font-bold mb-4">ブックマークしたマルシェ一覧</h2>
+ <div class="container mx-auto px-2 py-4">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <% @marches.each do |marche| %>
+        <% @bookmark_marches.each do |marche| %>
           
           <!-- カード全体を囲むdiv -->
           <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
@@ -118,15 +106,3 @@
           </div>
         <% end %>
       </div>
-      
-      <!-- 検索結果がない場合 -->
-      <% if @marches.empty? %>
-        <div class="text-center py-12">
-          <div class="text-6xl mb-4">🔍</div>
-          <h2 class="text-xl font-medium text-gray-600 mb-2">検索結果が見つかりませんでした</h2>
-          <p class="text-gray-500">別のキーワードで検索してみてください</p>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</div>
