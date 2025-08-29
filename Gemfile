@@ -50,6 +50,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem "letter_opener_web", "2.0.0"
 end
 
 group :test do
@@ -57,9 +58,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-  gem "devise"
-  gem "rails-i18n", "~> 7.0.0"
-  gem "carrierwave", "2.2.2"
-  gem "ransack", "~> 4.0"
-  gem "letter_opener_web", "2.0.0"
-  gem "meta-tags"
+
+gem "devise"
+gem "rails-i18n", "~> 7.0.0"
+gem "carrierwave", "2.2.2"
+gem "ransack", "~> 4.0"
+gem "meta-tags"
