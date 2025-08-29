@@ -2,7 +2,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: [:google_oauth2]
 
   mount_uploader :image, ImageUploader
 
@@ -15,7 +16,8 @@ class User < ApplicationRecord
   has_many :liked_posts, through: :likes, source: :post
   has_many :bookmarks, dependent: :destroy
   has_many :bookmark_marches, through: :bookmarks, source: :marche
- 
+
+  validates :uid, uniqueness: { scope: :provider }
   validates :hometown, presence: true, on: :registration
   validates :gender, presence: true, inclusion: { in: [ "男性", "女性", "その他" ] }, on: :registration
   validates :age, presence: true, numericality: { greater_than: 0, less_than: 150 },  on: :registration
@@ -48,5 +50,12 @@ class User < ApplicationRecord
 
   def bookmark?(marche)
     bookmark_marches.include?(marche)
+  end
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+    end
   end
 end

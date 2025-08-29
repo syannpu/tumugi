@@ -6,8 +6,8 @@ class Post < ApplicationRecord
   mount_uploaders :images, ImageUploader
   has_many :likes
 
-  require 'uri'
-  require 'cgi'
+  require "uri"
+  require "cgi"
 
   def youtube_video_id
     return nil if youtube_url.blank?
