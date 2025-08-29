@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
    registrations: "users/registrations",
    sessions:       "users/sessions",
-   passwords: "users/passwords"
+   passwords: "users/passwords",
+   omniauth_callbacks: 'users/omniauth_callbacks'
    }
+
   root "homes#index"
   get "how_to_use", to: "homes#how_to_use"
 
@@ -19,7 +21,7 @@ Rails.application.routes.draw do
     resource :likes, only: %i[create destroy index]
   end
   resources :likes, only: [ :index ]
- 
+
   resources :marches, only: %i[index new create show edit update destroy] do
     resources :join_marches, only: [ :index, :update ], controller: "marches/join_marches"
     member do
@@ -30,7 +32,7 @@ Rails.application.routes.draw do
     collection do
       get :bookmarks  # /marches/bookmarks
     end
-    resources :bookmarks, only: [:create, :destroy]
+    resources :bookmarks, only: [ :create, :destroy ]
   end
 
   resource :mypage, only: [ :show, :edit, :update ]

@@ -64,3 +64,7 @@ gem "rails-i18n", "~> 7.0.0"
 gem "carrierwave", "2.2.2"
 gem "ransack", "~> 4.0"
 gem "meta-tags"
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+gem 'dotenv-rails', groups: [:development, :test]
