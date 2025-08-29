@@ -30,5 +30,8 @@
     </header>
     <%= render 'shared/flash_message' %> 
     <%= yield %>
+    <% if controller_name == 'homes' && action_name == 'index' %>
+    <%= render 'shared/footer' %>
+    <% end %>
   </body>
 </html>

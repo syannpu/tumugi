@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   root "homes#index"
   get "how_to_use", to: "homes#how_to_use"
+  get "privacy", to: "homes#privacy"
+  get "terms", to: "homes#terms"
 
   devise_scope :user do
     delete "logout", to: "users/sessions#destroy", as: :logout
