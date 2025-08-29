@@ -260,7 +260,4 @@ Devise.setup do |config|
   config.omniauth :google_oauth2,
     ENV['GOOGLE_CLIENT_ID'],
     ENV['GOOGLE_CLIENT_SECRET'],
-    {
-      redirect_uri: "#{ENV['HOST']}/users/auth/google_oauth2/callback"
-    }
 end
