@@ -15,7 +15,14 @@ class MypagesController < ApplicationController
     if @user.update(mypage_params)
       redirect_to mypage_path, notice: "プロフィールを更新しました"
     else
-      Rails.logger.debug @user.errors.full_messages
+    # より確実な出力方法
+      puts "=== エラー内容 ==="
+      puts @user.errors.full_messages
+      puts "=================="
+     
+    # ログにも出力
+      Rails.logger.error "バリデーションエラー: #{@user.errors.full_messages}"
+    
       render "mypage/edit", status: :unprocessable_entity
     end
   end
