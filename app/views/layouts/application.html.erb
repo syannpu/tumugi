@@ -8,8 +8,8 @@
     <%= csp_meta_tag %>
 
     <%= yield :head %>
-    <%= set_marche_meta_tags(@marche) if @marche %>
-    <% display_meta_tags %>
+    <% set_marche_meta_tags(@marche) if @marche.present? %>
+    <%= display_meta_tags %>
     
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" href="/icon.png" type="image/png">
