@@ -33,6 +33,7 @@ class Mypage::JoinMarchesController < ApplicationController
       Rails.logger.error "JoinMarche save failed: #{join_marche.errors.full_messages}"
       redirect_to marche_path(marche), alert: "出品申請に失敗しました: #{join_marche.errors.full_messages.join(', ')}"
     end
+  end
 
   def update
     @marche = Marche.find(params[:marche_id])
