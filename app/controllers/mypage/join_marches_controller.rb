@@ -7,7 +7,6 @@ class Mypage::JoinMarchesController < ApplicationController
   def create
     marche = Marche.find(params[:marche_id])
 
-    # 既に申請済み（全ステータス）かチェック
     if current_user.join_marches.exists?(marche: marche)
       redirect_to marche_path(marche), alert: "既にこのマルシェに申請済みです"
       return
@@ -20,7 +19,6 @@ class Mypage::JoinMarchesController < ApplicationController
     )
 
     unless join_marche.valid?
-      Rails.logger.error "JoinMarche validation failed: #{join_marche.errors.full_messages}"
       redirect_to marche_path(marche), alert: "出品申請に失敗しました: #{join_marche.errors.full_messages.join(', ')}"
       return
     end
@@ -29,8 +27,6 @@ class Mypage::JoinMarchesController < ApplicationController
       redirect_to mypage_join_marches_path,
             success: "出品申請を送信しました！承認をお待ちください"
     else
-      # エラーの詳細を確認するため、一時的にこのように変更してみてください
-      Rails.logger.error "JoinMarche save failed: #{join_marche.errors.full_messages}"
       redirect_to marche_path(marche), alert: "出品申請に失敗しました: #{join_marche.errors.full_messages.join(', ')}"
     end
   end
