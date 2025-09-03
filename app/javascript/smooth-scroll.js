@@ -1,16 +1,20 @@
 function setupButtonScroll(btnSelector, targetSelector) {
-  document.querySelector(btnSelector).addEventListener('click', function() {
-    
-    const element = document.querySelector(targetSelector);
-
-    const position = element.offsetTop;
-    
-    window.scrollTo({
-      top: position,
-      behavior: 'smooth'
+  const button = document.querySelector(btnSelector);
+  
+  if (button) {
+    button.addEventListener('click', function() {
+      const element = document.querySelector(targetSelector);
+      if (element) {
+        const position = element.offsetTop;
+        window.scrollTo({
+          top: position,
+          behavior: 'smooth' 
+        });
+      }
     });
-  });
+  }
 }
+
 
 // 各ボタンとセクションを設定
 setupButtonScroll('.btn-organizer', '#organizer-section');
