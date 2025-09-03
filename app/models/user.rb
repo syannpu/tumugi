@@ -29,7 +29,7 @@ class User < ApplicationRecord
   def liked?(post)
     liked_posts.include?(post)  
   end
-  
+
   validates :username, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false }
   validates :uid, uniqueness: { scope: :provider }
   validates :hometown, presence: true
@@ -41,7 +41,6 @@ class User < ApplicationRecord
   validates :experience, presence: true, inclusion: { in: [ "初回", "2～5回", "6回以上" ] }
   validates :contact_info, presence: true, length: { maximum: 50 }
   validates :self_pr, presence: true, length: { maximum: 255 }
-  end
 
   def bookmark(marche)
     bookmark_marches << marche
