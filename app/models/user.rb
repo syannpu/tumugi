@@ -16,8 +16,6 @@ class User < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :bookmark_marches, through: :bookmarks, source: :marche
 
-
-
   def like(post)
     liked_posts << post
   end
@@ -30,17 +28,17 @@ class User < ApplicationRecord
     liked_posts.include?(post)  
   end
 
-  validates :username, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false }
-  validates :uid, uniqueness: { scope: :provider }
-  validates :hometown, presence: true
-  validates :gender, presence: true, inclusion: { in: [ "男性", "女性", "その他" ] }
-  validates :age, presence: true, numericality: { greater_than: 0, less_than: 150 }
-  validates :instagram, format: { with: /\A@?[a-zA-Z0-9_.]+\z/ }, allow_blank: true
-  validates :shop_name, presence: true, length: { maximum: 50 }
-  validates :products, presence: true, length: { maximum: 255 }
-  validates :experience, presence: true, inclusion: { in: [ "初回", "2～5回", "6回以上" ] }
-  validates :contact_info, presence: true, length: { maximum: 50 }
-  validates :self_pr, presence: true, length: { maximum: 255 }
+  validates :username, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false }, if: :profile_required?
+  validates :uid, uniqueness: { scope: :provider }, if: -> { uid.present? && provider.present? }
+  validates :hometown, presence: true, if: :profile_required?
+  validates :gender, presence: true, inclusion: { in: [ "男性", "女性", "その他" ] }, if: :profile_required?
+  validates :age, presence: true, numericality: { greater_than: 0, less_than: 150 }, if: :profile_required?
+  validates :instagram, format: { with: /\A@?[a-zA-Z0-9_.]+\z/ }, allow_blank: true, if: :profile_required?
+  validates :shop_name, presence: true, length: { maximum: 50 }, if: :profile_required?
+  validates :products, presence: true, length: { maximum: 255 }, if: :profile_required?
+  validates :experience, presence: true, inclusion: { in: [ "初回", "2～5回", "6回以上" ] }, if: :profile_required?
+  validates :contact_info, presence: true, length: { maximum: 50 }, if: :profile_required?
+  validates :self_pr, presence: true, length: { maximum: 255 }, if: :profile_required?
 
   def bookmark(marche)
     bookmark_marches << marche
@@ -59,5 +57,11 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
     end
+  end
+
+  private
+  
+  def profile_required?
+    validation_context == :profile_update
   end
 end
