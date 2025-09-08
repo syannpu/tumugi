@@ -11,19 +11,16 @@ class MypagesController < ApplicationController
   end
 
   def update
-    @user = current_user
-    if @user.update(mypage_params)
-      redirect_to mypage_path, notice: "プロフィールを更新しました"
+    current_user.assign_attributes(mypage_params)
+ 
+    if current_user.valid?(:profile_update)
+      if current_user.save
+        redirect_to mypage_path, notice: 'プロフィールを更新しました'
+      else
+        render :edit, status: :unprocessable_entity
+      end
     else
-    # より確実な出力方法
-      puts "=== エラー内容 ==="
-      puts @user.errors.full_messages
-      puts "=================="
-     
-    # ログにも出力
-      Rails.logger.error "バリデーションエラー: #{@user.errors.full_messages}"
-    
-      render "mypage/edit", status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 
