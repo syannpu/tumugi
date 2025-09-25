@@ -63,7 +63,7 @@ gem "devise"
 gem "rails-i18n", "~> 7.0.0"
 gem "carrierwave", "2.2.2"
 gem 'cloudinary'
-gem "ransack", "~> 4.0"
+gem "ransack", "~> 4.4"
 gem "meta-tags"
 gem "omniauth"
 gem "omniauth-google-oauth2"
